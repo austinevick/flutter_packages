@@ -1,6 +1,7 @@
 import 'package:appinio_video_player/src/controls/all_controls_overlay.dart';
 import 'package:appinio_video_player/src/custom_video_player_controller.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class EmbeddedVideoPlayer extends StatefulWidget {
@@ -61,7 +62,21 @@ class _EmbeddedVideoPlayerState extends State<EmbeddedVideoPlayer> {
         ),
       );
     } else {
-      return const SizedBox();
+      return Stack(
+        children: [
+          Center(
+            child: Container(
+              height: 205,
+              color: CupertinoColors.black,
+              child: AllControlsOverlay(
+                customVideoPlayerController: widget.customVideoPlayerController,
+                updateVideoState: _updateVideoState,
+              ),
+            ),
+          ),
+          const Center(child: CircularProgressIndicator())
+        ],
+      );
     }
   }
 
